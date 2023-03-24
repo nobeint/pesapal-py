@@ -25,7 +25,7 @@ class TestPesapal(unittest.TestCase):
                     "message": "Request processed successfully",
                 }
             )
-            actual_auth_request = self.pesapal.authorize()
+            actual_auth_request = self.pesapal.authenticate()
             self.assertEquals(actual_auth_request["status"], "success")
             self.assertIsNotNone(actual_auth_request["token"])
 
@@ -39,7 +39,7 @@ class TestPesapal(unittest.TestCase):
                     "message": "Request not processed successfully",
                 }
             )
-            actual_auth_request = self.pesapal.authorize()
+            actual_auth_request = self.pesapal.authenticate()
             self.assertEquals(actual_auth_request["status"], "failed")
             self.assertIsNotNone(actual_auth_request["error"])
 
@@ -123,21 +123,17 @@ class TestPesapal(unittest.TestCase):
                     "payment_status_code": "",
                     "currency": "KES",
                     "status": "200",
-                    "payment_status_description": "Completed"
+                    "payment_status_description": "Completed",
                 }
             )
             actual_get_transaction_status_request = self.pesapal.get_transaction_status(
                 "test_token", "test_order_tracking_id"
             )
             self.assertEquals(
-                actual_get_transaction_status_request[
-                    "status"
-                ],
+                actual_get_transaction_status_request["status"],
                 "success",
             )
-            self.assertIsNotNone(
-                actual_get_transaction_status_request["message"]
-            )
+            self.assertIsNotNone(actual_get_transaction_status_request["message"])
 
     def test_get_transaction_status_pending(self):
         with mock.patch("requests.get") as mocked_get:
@@ -158,21 +154,17 @@ class TestPesapal(unittest.TestCase):
                     "payment_status_code": "",
                     "currency": "KES",
                     "status": "200",
-                    "payment_status_description": "Pending"
+                    "payment_status_description": "Pending",
                 }
             )
             actual_get_transaction_status_request = self.pesapal.get_transaction_status(
                 "test_token", "test_order_tracking_id"
             )
             self.assertEquals(
-                actual_get_transaction_status_request[
-                    "status"
-                ],
+                actual_get_transaction_status_request["status"],
                 "pending",
             )
-            self.assertIsNotNone(
-                actual_get_transaction_status_request["message"]
-            )
+            self.assertIsNotNone(actual_get_transaction_status_request["message"])
 
     def test_get_transaction_status_failed(self):
         with mock.patch("requests.get") as mocked_get:
@@ -193,18 +185,20 @@ class TestPesapal(unittest.TestCase):
                     "payment_status_code": "",
                     "currency": "KES",
                     "status": "200",
-                    "payment_status_description": "Failed"
+                    "error": {
+                        "error_type": None,
+                        "code": 0,
+                        "message": "msg",
+                        "call_back_url": "",
+                    },
+                    "payment_status_description": "Failed",
                 }
             )
             actual_get_transaction_status_request = self.pesapal.get_transaction_status(
                 "test_token", "test_order_tracking_id"
             )
             self.assertEquals(
-                actual_get_transaction_status_request[
-                    "status"
-                ],
+                actual_get_transaction_status_request["status"],
                 "failed",
             )
-            self.assertIsNotNone(
-                actual_get_transaction_status_request["message"]
-            )
+            self.assertIsNotNone(actual_get_transaction_status_request["message"])
