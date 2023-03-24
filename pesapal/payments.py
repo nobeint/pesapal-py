@@ -14,6 +14,18 @@ class PesaPal(object):
         }
 
     def authenticate(self) -> dict:
+        """
+        Authenticates against PesaPal
+
+        returns:
+            authentication object (dict) containing:
+                status (str): success or failed (always returned)
+                error (str): error message when authentication fails (returned only when status is failed)
+                token (str): Bearer token to authenticate all other PesaPal APIs (returned only when status is success)
+                expiry (str): Date and time the token will expire. The access token usually expires after 5mins - UTC (returned only when status is success)
+
+        Explore https://developer.pesapal.com/how-to-integrate/e-commerce/api-30-json/authentication for more details
+        """
         auth_payload = {
             "consumer_key": self.consumer_key,
             "consumer_secret": self.consumer_secret,
