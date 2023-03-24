@@ -1,4 +1,4 @@
-# pesapal-python-lib
+# pesapal-py
 A minimalist python library that integrates with PesaPal's API 3.0 - JSON APIs (https://developer.pesapal.com/how-to-integrate/e-commerce/api-30-json/api-reference).
 
 This library abstracts PesaPals API 3.0 into four main methods, `authenticate`, `register_ipn`, `transact` and `get_transaction_status`
