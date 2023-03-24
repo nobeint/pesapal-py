@@ -13,7 +13,7 @@ class PesaPal(object):
             "Content-Type": "application/json",
         }
 
-    def authorize(self):
+    def authorize(self) -> dict:
         auth_payload = {
             "consumer_key": self.consumer_key,
             "consumer_secret": self.consumer_secret,
@@ -43,7 +43,7 @@ class PesaPal(object):
             "message": f"invalid server response",
         }
 
-    def register_ipn(self, token, ipn_url):
+    def register_ipn(self, token: str, ipn_url: str) -> dict:
         register_ipn_payload = {"url": ipn_url, "ipn_notification_type": "POST"}
         self.headers["Authorization"] = f"Bearer {token}"
         register_ipn_response = requests.post(
@@ -85,7 +85,7 @@ class PesaPal(object):
         first_name: str,
         last_name: str,
         currency: str = "KES",
-    ):
+    ) -> dict:
         transaction_payload = {
             "id": transaction_id,
             "currency": currency,
@@ -129,7 +129,7 @@ class PesaPal(object):
             "message": f"invalid server response",
         }
 
-    def get_transaction_status(self, token, order_tracking_id):
+    def get_transaction_status(self, token: str, order_tracking_id: str) -> dict:
         self.headers["Authorization"] = f"Bearer {token}"
         get_transaction_status_response = requests.get(
             f"{self.base_production_url}/Transactions/GetTransactionStatus?orderTrackingId={order_tracking_id}",
