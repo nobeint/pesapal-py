@@ -13,7 +13,7 @@ class PesaPal(object):
             "Content-Type": "application/json",
         }
 
-    def authorize(self) -> dict:
+    def authenticate(self) -> dict:
         auth_payload = {
             "consumer_key": self.consumer_key,
             "consumer_secret": self.consumer_secret,

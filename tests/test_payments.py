@@ -25,7 +25,7 @@ class TestPesapal(unittest.TestCase):
                     "message": "Request processed successfully",
                 }
             )
-            actual_auth_request = self.pesapal.authorize()
+            actual_auth_request = self.pesapal.authenticate()
             self.assertEquals(actual_auth_request["status"], "success")
             self.assertIsNotNone(actual_auth_request["token"])
 
@@ -39,7 +39,7 @@ class TestPesapal(unittest.TestCase):
                     "message": "Request not processed successfully",
                 }
             )
-            actual_auth_request = self.pesapal.authorize()
+            actual_auth_request = self.pesapal.authenticate()
             self.assertEquals(actual_auth_request["status"], "failed")
             self.assertIsNotNone(actual_auth_request["error"])
 
