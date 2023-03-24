@@ -26,7 +26,7 @@ class TestPesapal(unittest.TestCase):
                 }
             )
             actual_auth_request = self.pesapal.authenticate()
-            self.assertEquals(actual_auth_request["status"], "success")
+            self.assertEqual(actual_auth_request["status"], "success")
             self.assertIsNotNone(actual_auth_request["token"])
 
     def test_authorization_not_successful(self):
@@ -40,7 +40,7 @@ class TestPesapal(unittest.TestCase):
                 }
             )
             actual_auth_request = self.pesapal.authenticate()
-            self.assertEquals(actual_auth_request["status"], "failed")
+            self.assertEqual(actual_auth_request["status"], "failed")
             self.assertIsNotNone(actual_auth_request["error"])
 
     def test_register_ipn_successful(self):
@@ -57,7 +57,7 @@ class TestPesapal(unittest.TestCase):
             actual_register_ipn_request = self.pesapal.register_ipn(
                 "test_token", "https://test_url"
             )
-            self.assertEquals(actual_register_ipn_request["status"], "success")
+            self.assertEqual(actual_register_ipn_request["status"], "success")
             self.assertIsNotNone(actual_register_ipn_request["ipn_url"])
 
     def test_register_ipn_not_successful(self):
@@ -73,7 +73,7 @@ class TestPesapal(unittest.TestCase):
             actual_register_ipn_request = self.pesapal.register_ipn(
                 "test_token", "https://test_url"
             )
-            self.assertEquals(actual_register_ipn_request["status"], "failed")
+            self.assertEqual(actual_register_ipn_request["status"], "failed")
             self.assertIsNotNone(actual_register_ipn_request["error"])
 
     def test_transact_successful(self):
@@ -100,7 +100,7 @@ class TestPesapal(unittest.TestCase):
                 "first_name",
                 "last_name",
             )
-            self.assertEquals(actual_transact_request["status"], "success")
+            self.assertEqual(actual_transact_request["status"], "success")
             self.assertIsNotNone(actual_transact_request["order_tracking_id"])
             self.assertIsNotNone(actual_transact_request["redirect_url"])
 
@@ -129,7 +129,7 @@ class TestPesapal(unittest.TestCase):
             actual_get_transaction_status_request = self.pesapal.get_transaction_status(
                 "test_token", "test_order_tracking_id"
             )
-            self.assertEquals(
+            self.assertEqual(
                 actual_get_transaction_status_request["status"],
                 "success",
             )
@@ -160,7 +160,7 @@ class TestPesapal(unittest.TestCase):
             actual_get_transaction_status_request = self.pesapal.get_transaction_status(
                 "test_token", "test_order_tracking_id"
             )
-            self.assertEquals(
+            self.assertEqual(
                 actual_get_transaction_status_request["status"],
                 "pending",
             )
@@ -197,7 +197,7 @@ class TestPesapal(unittest.TestCase):
             actual_get_transaction_status_request = self.pesapal.get_transaction_status(
                 "test_token", "test_order_tracking_id"
             )
-            self.assertEquals(
+            self.assertEqual(
                 actual_get_transaction_status_request["status"],
                 "failed",
             )
