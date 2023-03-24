@@ -13,7 +13,7 @@ class TestPesapal(unittest.TestCase):
     def setUp(self):
         self.pesapal = PesaPal("test_consumer_key", "test_consumer_secret")
 
-    def test_authorization_successful(self):
+    def test_authentication_successful(self):
         with mock.patch("requests.post") as mocked_post:
             mocked_post.return_value.status_code = 200
             mocked_post.return_value.content = json.dumps(
@@ -29,12 +29,16 @@ class TestPesapal(unittest.TestCase):
             self.assertEqual(actual_auth_request["status"], "success")
             self.assertIsNotNone(actual_auth_request["token"])
 
-    def test_authorization_not_successful(self):
+    def test_authentication_not_successful(self):
         with mock.patch("requests.post") as mocked_post:
             mocked_post.return_value.status_code = 200
             mocked_post.return_value.content = json.dumps(
                 {
-                    "error": {"message": "some error message"},
+                    "error": {
+                        "error_type": "api_error",
+                        "code": "invalid_consumer_key_or_secret_provided",
+                        "message": "",
+                    },
                     "status": "failed",
                     "message": "Request not processed successfully",
                 }
@@ -65,7 +69,11 @@ class TestPesapal(unittest.TestCase):
             mocked_post.return_value.status_code = 200
             mocked_post.return_value.content = json.dumps(
                 {
-                    "error": {"message": "some error message"},
+                    "error": {
+                        "error_type": "api_error",
+                        "code": "some error code",
+                        "message": "some error message",
+                    },
                     "status": "failed",
                     "message": "Request not processed successfully",
                 }
