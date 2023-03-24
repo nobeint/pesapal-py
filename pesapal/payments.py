@@ -20,7 +20,8 @@ class PesaPal(object):
         returns:
             authentication object (dict) containing:
                 status (str): success or failed (always returned)
-                error (str): error message when authentication fails (returned only when status is failed)
+                error (obj): error object returned by PesaPal when authentication fails (returned only when status is failed)
+                message (str): a brief description about the response received (returned only when status is failed)
                 token (str): Bearer token to authenticate all other PesaPal APIs (returned only when status is success)
                 expiry (str): Date and time the token will expire. The access token usually expires after 5mins - UTC (returned only when status is success)
 
@@ -56,6 +57,24 @@ class PesaPal(object):
         }
 
     def register_ipn(self, token: str, ipn_url: str) -> dict:
+        """
+        Registers an Instant Payment Notification (IPN) URL on PesaPal servers.
+        This registered IPN URL is used by By PesaPal to send payment notifications
+
+        params:
+            token (str): active token from the `authenticate` method
+            ipn_url (str): the URL that PesaPal will use to send payment notifications
+
+        returns:
+            a dictionary containing
+                status (str): success or failed (always returned)
+                error (str): error message when authentication fails (returned only when status is failed)
+                message (str): a brief description about the response received (returned only when status is failed)
+                ipn_url (str): the successfully registered ipn url
+                ipn_id (str): unique identifier that's liked to the IPN endpoint URL (GUID)
+
+        Explore https://developer.pesapal.com/how-to-integrate/e-commerce/api-30-json/registeripnurl for more details
+        """
         register_ipn_payload = {"url": ipn_url, "ipn_notification_type": "POST"}
         self.headers["Authorization"] = f"Bearer {token}"
         register_ipn_response = requests.post(
