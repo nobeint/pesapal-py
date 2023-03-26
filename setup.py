@@ -7,5 +7,7 @@ setup(
     author="Brian Owino Otieno",
     author_email="brian.otieno709@gmail.com",
     packages=["pesapal_py"],
+    url="https://github.com/twais/pesapal-py",
+    download_url="https://github.com/twais/pesapal-py/archive/refs/tags/v0.0.1.tar.gz",
     install_requires=["requests"],
 )
