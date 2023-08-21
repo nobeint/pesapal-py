@@ -16,7 +16,7 @@ pip install pesapal-py
 
 ### Authenticating
 ```
-from pesapal_py.payments import PesaPal
+from pesapal.payments import PesaPal
 
 pesapal = PesaPal("test_consumer_key", "test_consumer_secret")
 auth = pesapal.authenticate()
