@@ -6,7 +6,7 @@ except ImportError:
 import mock
 import json
 
-from pesapal_py.payments import PesaPal
+from pesapal.payments import PesaPal
 
 
 class TestPesapal(unittest.TestCase):
