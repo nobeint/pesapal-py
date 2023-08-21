@@ -25,7 +25,7 @@ pathspec==0.11.1
 pkginfo==1.9.6
 platformdirs==3.1.1
 pluggy==1.0.0
-Pygments==2.14.0
+Pygments>=2.15.0
 pyproject_hooks==1.0.0
 pytest==7.2.2
 readme-renderer==37.3
