@@ -5,8 +5,8 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setup(
-    name="pesapal",
-    version="0.0.2",
+    name="pesapal_py",
+    version="0.1.1",
     description="A minimalist python library that integrates with PesaPal's API 3.0 - JSON APIs (https://developer.pesapal.com/how-to-integrate/e-commerce/api-30-json/api-reference)",
     long_description=long_description,
     long_description_content_type='text/markdown',
